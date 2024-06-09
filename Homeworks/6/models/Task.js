@@ -6,7 +6,7 @@ class Task {
         difficultyLevel,
         inputDataExample,
         outputDataExample,
-        userId
+        userId = null
     ) {
         this.id = id;
         this.name = name;
