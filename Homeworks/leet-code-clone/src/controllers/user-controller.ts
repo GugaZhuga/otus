@@ -30,7 +30,5 @@ export class UserController {
     @Get(":id/tasks")
     async findTasks(@Param("id") id: number){
         return await this.userRepository.findOne(id).then(async x => await x.tasks);
-        /*const tasks = await user.tasks;
-        return tasks;*/
     }
 }
