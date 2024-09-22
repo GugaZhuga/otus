@@ -1,0 +1,29 @@
+<div class="TaskView">
+    <form #taskForm="ngForm" (ngSubmit)="save()">
+        <div>
+            <label>Название</label>
+            <input type="text" required name="name" [(ngModel)]="model.name"/>
+        </div>
+        <div>
+            <label>Сложность</label>
+            <select name="complexity" [(ngModel)]="model.complexity">
+                @for(complexity of complexities; track complexity[1]){
+                    <option [value]="complexity[1]">{{complexity[0]}}</option>
+                }
+            </select>
+        </div>
+        <div>
+            <label>Тэги</label>
+            <select name="tagIds" [(ngModel)]="model.tagIds" multiple>
+                @for(tag of tags; track tag.id){
+                    <option [value]="tag.id">{{tag.name}}</option>
+                }
+            </select>
+        </div>
+        <div>
+            <label>Популярность</label>
+            <input type="number" name="popularity" [(ngModel)]="model.popularity"/>
+        </div>
+        <button type="submit" [disabled]="!taskForm.valid">Сохранить</button>
+    </form>
+</div>
