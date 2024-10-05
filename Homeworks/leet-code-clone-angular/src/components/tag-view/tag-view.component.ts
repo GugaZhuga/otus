@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Tag } from '../../models/Tag';
+import { Tag } from '../../models/Tag.model';
 import { delay, tags } from '../../utils';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -20,7 +20,7 @@ export class TagViewComponent {
     this.model = tags.find(x => x.id == tagId) ?? this.model;
   }
   model: Tag = new Tag();
-  async save(){
+  async save(): Promise<void>{
     await delay();
     if (this.model.id == 0){
       this.model.id = tags[tags.length - 1].id + 1;

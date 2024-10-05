@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Task, TaskComplexity } from '../../models/Task';
+import { Task } from '../../models/Task.model';
 import { delay, tags, tasks } from '../../utils';
 import { CommonModule, JsonPipe } from '@angular/common';
-import { Tag } from '../../models/Tag';
+import { Tag } from '../../models/Tag.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TaskComplexity } from '../../models/enums/TaskComplexity';
 
 @Component({
   selector: 'app-task-view',
@@ -24,7 +25,7 @@ export class TaskViewComponent {
   model: Task = new Task(0, "", TaskComplexity.Middle);
   complexities: [string, TaskComplexity][] = Object.entries(TaskComplexity).filter(x => typeof(x[1]) === "number").map(x => [x[0], x[1] as TaskComplexity]);
   tags: Tag[] = tags;
-  async save(){
+  async save(): Promise<void>{
     await delay();
     if (this.model.id == 0){
       this.model.id = tasks[tasks.length - 1].id + 1;

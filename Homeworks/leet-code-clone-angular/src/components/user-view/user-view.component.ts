@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { User, UserLevel } from '../../models/User';
+import { User } from '../../models/User.model';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { delay, users } from '../../utils';
 import { CommonModule } from '@angular/common';
+import { UserLevel } from '../../models/enums/UserLevel';
 
 @Component({
   selector: 'app-user-view',
@@ -22,7 +23,7 @@ export class UserViewComponent {
   }
   model: User = new User();
   levels: [string, UserLevel][] = Object.entries(UserLevel).filter(x => typeof(x[1]) === "number").map(x => [x[0], x[1] as UserLevel]);
-  async save(){
+  async save(): Promise<void>{
     await delay();
     if (this.model.id == 0){
       this.model.id = users[users.length - 1].id + 1;

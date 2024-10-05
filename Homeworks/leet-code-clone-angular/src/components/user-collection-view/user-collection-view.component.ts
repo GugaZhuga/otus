@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { User } from '../../models/User';
+import { User } from '../../models/User.model';
 import { delay, users } from '../../utils';
 import { Router } from '@angular/router';
 
@@ -19,24 +19,24 @@ export class UserCollectionViewComponent {
   }
   users: User[] = users;
   selectedUser : User|null = null;
-  selectUser(user: User|null){
+  selectUser(user: User|null): void{
     this.selectedUser = user;
   }
-  add(){
+  add(): void{
     this.router.navigate(["/users", 0]);
   }
-  edit() {
+  edit(): void{
     if (this.selectedUser == null)
       return;
     this.router.navigate(["/users", this.selectedUser.id]);
   }
-  remove(){
+  remove(): void{
     if (this.selectedUser == null)
       return;
     const index = this.users.indexOf(this.selectedUser);
     this.users.splice(index);
   }
-  async save(){
+  async save(): Promise<void>{
     await delay();
   }
 }

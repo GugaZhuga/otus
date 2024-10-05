@@ -1,9 +1,11 @@
 export async function delay(ms: number = 1000){
     await new Promise(x => setTimeout(x, ms));
 }
-import { Tag } from "./models/Tag";
-import { Task, TaskComplexity } from "./models/Task";
-import { User, UserLevel } from "./models/User";
+import { TaskComplexity } from "./models/enums/TaskComplexity";
+import { UserLevel } from "./models/enums/UserLevel";
+import { Tag } from "./models/Tag.model";
+import { Task } from "./models/Task.model";
+import { User } from "./models/User.model";
 export const tasks: Task[] = [
     new Task(1, "First task", TaskComplexity.Junior, 1, [1], "using System;"),
     new Task(2, "Second task", TaskComplexity.Middle, 5, [], "const constant: number = 5"),
