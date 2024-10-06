@@ -1,0 +1,21 @@
+<div class="UserViewComponent">
+    <form #userForm="ngForm" (ngSubmit)="save()">
+        <div>
+            <label>Имя</label>
+            <input type="text" required name="firstName" [(ngModel)]="model.firstName"/>
+        </div>
+        <div>
+            <label>Фамилия</label>
+            <input type="text" required name="secondName" [(ngModel)]="model.secondName"/>
+        </div>
+        <div>
+            <label>Имя</label>
+            <select name="level" [(ngModel)]="model.level">
+                @for(level of levels; track level[1]){
+                    <option [value]="level[1]">{{level[0]}}</option>
+                }
+            </select>
+        </div>
+        <button type="submit" [disabled]="!userForm.valid">Сохранить</button>
+    </form>
+</div>

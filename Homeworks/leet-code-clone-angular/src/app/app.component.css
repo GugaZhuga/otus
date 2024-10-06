@@ -1,0 +1,6 @@
+app-navigation-menu{
+    padding: 15px;
+}
+router-outlet{
+    padding: 15px;
+}

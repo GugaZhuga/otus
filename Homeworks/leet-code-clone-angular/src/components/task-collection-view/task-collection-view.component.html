@@ -1,0 +1,35 @@
+<div class="TaskCollectionView">
+    <form (ngSubmit)="save()">
+        <div>
+            <div>
+                <button type="submit">Применить</button>
+                <button type="button">Отменить</button>
+            </div>
+            <div>
+                <button type="menu" (click)="add()">Добавить</button>
+                <button type="menu" (click)="remove()" [disabled]="selectedTask == null">Удалить</button>
+                <button type="menu" (click)="edit()" [disabled]="selectedTask == null">Редактировать</button>
+            </div>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Сложность</th>
+                    <th>Популярность</th>
+                    <th>Тэги</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for(task of tasks; track task.id){
+                    <tr (click)="selectTask(task)">
+                        <td>{{task.name}}</td>
+                        <td>{{getComplexityLine(task.complexity)}}</td>
+                        <td>{{task.popularity}}</td>
+                        <td>{{getTagsLine(task.tagIds)}}</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </form>
+</div>

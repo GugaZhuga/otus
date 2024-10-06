@@ -1,0 +1,29 @@
+<div>
+    <form (ngSubmit)="save()">
+        <div>
+            <button type="submit">Применить</button>
+            <button type="button">Отменить</button>
+        </div>
+        <div>
+            <button type="menu" (click)="add()">Добавить</button>
+            <button type="menu" (click)="remove()" [disabled]="selectedTag == null">Удалить</button>
+            <button type="menu" (click)="edit()" [disabled]="selectedTag == null">Редактировать</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Описание</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for(tag of tags; track tag.id){
+                    <tr (click)="selectTag(tag)">
+                        <td>{{tag.name}}</td>
+                        <td>{{tag.description}}</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </form>
+</div>
