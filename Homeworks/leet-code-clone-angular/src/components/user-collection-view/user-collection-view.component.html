@@ -1,0 +1,33 @@
+<div class="UserCollectionView">
+    <form (ngSubmit)="save()">
+        <div>
+            <div>
+                <button type="submit">Применить</button>
+                <button type="button">Отменить</button>
+            </div>
+            <div>
+                <button type="menu" (click)="add()">Добавить</button>
+                <button type="menu" (click)="remove()">Удалить</button>
+                <button type="menu" (click)="edit()">Редактировать</button>
+            </div>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Имя</th>
+                    <th>Фамилия</th>
+                    <th>Уровень</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for(user of users; track user.id){
+                    <tr (click)="selectUser(user)">
+                        <td>{{user.firstName}}</td>
+                        <td>{{user.secondName}}</td>
+                        <td>{{user.level}}</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </form>
+</div>

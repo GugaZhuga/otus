@@ -1,0 +1,13 @@
+<div class="TagView">
+    <form #tagForm="ngForm" (ngSubmit)="save()">
+        <div>
+            <label>Название</label>
+            <input type="text" required name="name" [(ngModel)]="model.name"/>
+        </div>
+        <div>
+            <label>Описание</label>
+            <textarea name="description" [(ngModel)]="model.description"></textarea>
+        </div>
+        <button type="submit">Сохранить</button>
+    </form>
+</div>
