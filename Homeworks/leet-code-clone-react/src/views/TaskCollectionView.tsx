@@ -1,7 +1,8 @@
-import { ChangeEvent, ChangeEventHandler, SyntheticEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { Task, TaskComplexity } from "../models/Task.model"
 import { tasks, complexities, delay }from "../utils/utils"
 import { useNavigate } from "react-router-dom";
+import Loader from "./Loader";
 
 export default function TaskCollectionView()
 {
@@ -16,10 +17,10 @@ export default function TaskCollectionView()
     async function search(){
         setIsLoading(true);
         await delay();
-        setItems(tasks.filter(x => (Number.isNaN(id) || id == x.id)
-            && (name == "" || name == x.name)
-            && (complexity == null || complexity == x.complexity)
-            && (Number.isNaN(popularity) || popularity == x.popularity)));
+        setItems(tasks.filter(x => (Number.isNaN(id) || id === x.id)
+            && (name === "" || name === x.name)
+            && (complexity === null || complexity === x.complexity)
+            && (Number.isNaN(popularity) || popularity === x.popularity)));
         setIsLoading(false);
     }
     async function clear(){
@@ -30,7 +31,7 @@ export default function TaskCollectionView()
         await search();
     }
     function findComplexity(item: TaskComplexity|number|string|null){
-        return complexities.find(y => y[0] == item || y[1] == item) ?? null;
+        return complexities.find(y => y[0] === item || y[1] === item) ?? null;
     }
     function changeComplexity(event: ChangeEvent<HTMLSelectElement>){
         setComplexity(findComplexity(event.target.value)?.[1] ?? null);
@@ -50,70 +51,72 @@ export default function TaskCollectionView()
     }
     async function removeById(id: number|null|undefined) : Promise<void> {
         if (id)
-            tasks.splice(tasks.findIndex(x => x.id == id));
+            tasks.splice(tasks.findIndex(x => x.id === id));
         await search();
     }
     async function removeSelected() : Promise<void> {
         removeById(selected?.id);
     }
-    return <div>
-        <table>
-            <thead>
-                <tr>
-                    <td>
-                        <button onClick={add}>Добавить</button>
-                        <button onClick={editSelected}>Редактирвоать</button>
-                        <button onClick={removeSelected}>Удалить</button>
-                    </td>
-                </tr>
-                <tr>
-                    <th></th>
-                    <th>Код</th>
-                    <th>Имя</th>
-                    <th>Сложность</th>
-                    <th>Популярность</th>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="number" value={id.toString()} onChange={x => setId(Number(x.target.value))}></input>
-                    </td>
-                    <td>
-                        <input type="text" value={name} onChange={x => setName(x.target.value)}></input>
-                    </td>
-                    <td>
-                        <select value={findComplexity(complexity)?.[0]??""} onChange={changeComplexity}>
-                            <option key={null}>Любой</option>
-                            {complexities.map(x => <option key={x[1]}>{x[0]}</option>)}
-                        </select>
-                    </td>
-                    <td>
-                        <input type="number" value={popularity.toString()} onChange={x => setPopularity(Number(x.target.value))}></input>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div>
-                            <button onClick={search}>Поиск</button>
-                            <button onClick={clear}>Очистить</button>
-                        </div>
-                    </td>
-                </tr>
-            </thead>
-            <tbody>{
-                isLoading ? <tr><td>Loading...</td></tr> :
-                items.map((task, index )=> <tr key={index} onClick={x => setSelected(task)} onDoubleClick={x => editById(task.id)}>
-                    <td>
-                        <input type="radio" checked={selected == task} onChange={x => setSelected(Boolean(x.target.value) ? task : null)}></input>
-                    </td>
-                    <td>{task.id}</td>
-                    <td>{task.name}</td>
-                    <td>{task.complexity}</td>
-                    <td>{task.popularity}</td>
-                    <td>
-                        <button onClick={x => removeById(task.id)}>X</button>
-                    </td>
-                </tr>)
-            }</tbody>
-        </table>
-    </div>
+    return (
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <td>
+                            <button onClick={add}>Добавить</button>
+                            <button onClick={editSelected}>Редактирвоать</button>
+                            <button onClick={removeSelected}>Удалить</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th>Код</th>
+                        <th>Имя</th>
+                        <th>Сложность</th>
+                        <th>Популярность</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="number" value={id.toString()} onChange={x => setId(Number(x.target.value))}></input>
+                        </td>
+                        <td>
+                            <input type="text" value={name} onChange={x => setName(x.target.value)}></input>
+                        </td>
+                        <td>
+                            <select value={findComplexity(complexity)?.[0]??""} onChange={changeComplexity}>
+                                <option key={null}>Любой</option>
+                                {complexities.map(x => <option key={x[1]}>{x[0]}</option>)}
+                            </select>
+                        </td>
+                        <td>
+                            <input type="number" value={popularity.toString()} onChange={x => setPopularity(Number(x.target.value))}></input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                <button onClick={search}>Поиск</button>
+                                <button onClick={clear}>Очистить</button>
+                            </div>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>{
+                    isLoading ? <tr><td><Loader></Loader></td></tr> :
+                    items.map((task, index )=> <tr key={index} onClick={x => setSelected(task)} onDoubleClick={x => editById(task.id)}>
+                        <td>
+                            <input type="radio" checked={selected === task} onChange={x => setSelected(Boolean(x.target.value) ? task : null)}></input>
+                        </td>
+                        <td>{task.id}</td>
+                        <td>{task.name}</td>
+                        <td>{task.complexity}</td>
+                        <td>{task.popularity}</td>
+                        <td>
+                            <button onClick={x => removeById(task.id)}>X</button>
+                        </td>
+                    </tr>)
+                }</tbody>
+            </table>
+        </div>
+    );
 }

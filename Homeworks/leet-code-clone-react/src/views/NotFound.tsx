@@ -1,5 +1,7 @@
 export default function NotFound(){
-    return <div>
-        Не найдено!!!
-    </div>;
+    return (
+        <div>
+            Не найдено!!!
+        </div>
+    );
 }

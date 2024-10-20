@@ -9,7 +9,7 @@ export default function UserView(){
     const { id } = useParams();
     useEffect(() => {
         if (id){
-            const user = users.find(x => x.id == Number(id))!;
+            const user = users.find(x => x.id === Number(id))!;
             setName(user.name);
         }
     }, []);
@@ -21,14 +21,16 @@ export default function UserView(){
     function cancel() : void {
         navigate("/users");
     }
-    return <div>
+    return (
         <div>
-            <label>Имя</label>
-            <input value={name} onChange={x => setName(x.target.value)}></input>
+            <div>
+                <label>Имя</label>
+                <input value={name} onChange={x => setName(x.target.value)}></input>
+            </div>
+            <div>
+                <button onClick={save}>Сохранить</button>
+                <button onClick={cancel}>Отмена</button>
+            </div>
         </div>
-        <div>
-            <button onClick={save}>Сохранить</button>
-            <button onClick={cancel}>Отмена</button>
-        </div>
-    </div>;
+    );
 }
