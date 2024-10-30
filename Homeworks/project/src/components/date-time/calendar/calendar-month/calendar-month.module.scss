@@ -1,0 +1,49 @@
+.month {
+    @include body-2-500();
+    border-radius: 8px;
+    // padding: 12px 8px 12px 8px;
+    align-content: center;
+    vertical-align: middle;
+    color: var(--text-description);
+    &.today {
+        border-width: 1px;
+        border-style: solid;
+        border-color: var(--primary-color);
+    };
+    &.current {
+        color: var(--text-color);
+    };
+    &.notAvailable {
+        color: $text-error;
+    };
+    &.selected {
+        color: white;
+        background-color: var(--primary-color);
+        &.range {
+            border-radius: 0px;
+            background-color: color-mix(in srgb, var(--primary-color) 30%, white 100%);
+        };
+        &.start {
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+            background-color: var(--primary-color);
+        };
+        &.end {
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+            background-color: var(--primary-color);
+        };
+        &.today {
+            // color: var(--primary-color);
+            // background-color: white;
+            border-style: none;
+        };
+        &:hover {
+            color: var(--primary-color);
+            background-color: var(--background-color);
+        };
+    };
+    &:hover {
+        background-color: var(--background-color);
+    };
+}

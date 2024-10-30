@@ -1,0 +1,14 @@
+.calendar {
+    cursor: default;
+    display: grid;
+    width: 300px;
+    height: auto;
+    border-radius: 12px;
+    grid-template-columns: 300px;
+    grid-template-rows: 52px auto;
+    row-gap: 1px;
+    text-align: center;
+    color: var(--text-color);
+    background-color: $bg-gray;
+    box-shadow: $shadow;
+}

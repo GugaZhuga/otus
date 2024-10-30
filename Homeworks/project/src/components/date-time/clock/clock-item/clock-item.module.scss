@@ -1,0 +1,51 @@
+.clockItem {
+    display: grid;
+    grid-template-columns: 24px 16px;
+    grid-template-rows: 16px 16px;
+    padding: 4px 10px 4px 10px;
+    border-radius: 4px;
+    background-color: $bg;
+    @include body-2-500();
+
+    input[type="number"] {
+        border: none;
+        outline: none;
+        font-size: 14px;
+        background-color: transparent;
+        // webkit
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            display: none;
+        };
+        // Firefox
+        @supports(-moz-appearance:textfield) {
+            -moz-appearance:textfield;
+        }
+    };
+    button {
+        border: none;
+        outline: none;    
+        padding: 0;
+        background-color: transparent;
+        img {
+            opacity: 0.5;
+            &:hover {
+                opacity: 1;
+            } 
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+.value {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+}
+.buttonUp {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+}
+.buttonDown {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+}

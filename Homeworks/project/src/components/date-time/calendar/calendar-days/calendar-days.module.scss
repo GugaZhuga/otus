@@ -1,0 +1,21 @@
+.days {
+    display: grid;
+    grid-template-columns: 284px;
+    grid-template-rows: 30px 180px;
+    padding: 12px 8px 16px 8px;
+    border-radius: 0px 0px 12px 12px;
+    background-color: white;
+    &>div:first-child {
+        display: grid;
+        grid-template-columns: repeat(7, auto);
+        column-gap: 4px;
+    };
+    &>div:last-child {
+        display: grid;
+        grid-template-columns: repeat(7, auto);
+        grid-template-rows: repeat(6, 24px);
+        column-gap: 0px;
+        row-gap: 6px;
+        padding: 3px 0px;
+    };
+}
