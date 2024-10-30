@@ -1,0 +1,10 @@
+.months {
+    display: grid;
+    grid-template-columns: repeat(3, 76px);
+    grid-template-rows: repeat(4, 40px);
+    column-gap: 28px;
+    row-gap: 12px;
+    padding: 12px 8px 16px 8px;
+    border-radius: 0px 0px 12px 12px;
+    background-color: white;
+}
